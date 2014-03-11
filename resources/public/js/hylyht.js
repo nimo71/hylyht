@@ -29432,16 +29432,21 @@ goog.provide("hylyht.login");
 goog.require("cljs.core");
 goog.require("domina");
 goog.require("domina.events");
+goog.require("hiccups.runtime");
+goog.require("hiccups.runtime");
 goog.require("domina.events");
-goog.require("hiccups.runtime");
-goog.require("hiccups.runtime");
 goog.require("domina");
-hylyht.login._STAR_password_re_STAR_ = /^(?=.*\d).{4,8}$/;
-hylyht.login._STAR_email_re_STAR_ = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 hylyht.login.validate_email = function validate_email(email) {
   domina.destroy_BANG_.call(null, domina.by_class.call(null, "email"));
-  if(cljs.core.not.call(null, cljs.core.re_matches.call(null, hylyht.login._STAR_email_re_STAR_, domina.value.call(null, email)))) {
-    domina.prepend_BANG_.call(null, domina.by_id.call(null, "loginForm"), [cljs.core.str('\x3cdiv class\x3d"help email"\x3eWrong email\x3c/div\x3e')].join(""));
+  if(cljs.core.not.call(null, cljs.core.re_matches.call(null, cljs.core.re_pattern.call(null, domina.attr.call(null, email, new cljs.core.Keyword(null, "pattern", "pattern", 4517781250))), domina.value.call(null, email)))) {
+    domina.prepend_BANG_.call(null, domina.by_id.call(null, "loginForm"), [cljs.core.str(function() {
+      var attrs5738 = domina.attr.call(null, email, new cljs.core.Keyword(null, "title", "title", 1124275658));
+      if(cljs.core.map_QMARK_.call(null, attrs5738)) {
+        return[cljs.core.str("\x3cdiv"), cljs.core.str(hiccups.runtime.render_attr_map.call(null, cljs.core.merge.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "id", "id", 1013907597), null, new cljs.core.Keyword(null, "class", "class", 1108647146), "help email"], true), attrs5738))), cljs.core.str("\x3e"), cljs.core.str("\x3c/div\x3e")].join("")
+      }else {
+        return[cljs.core.str('\x3cdiv class\x3d"help email"\x3e'), cljs.core.str(hiccups.runtime.render_html.call(null, attrs5738)), cljs.core.str("\x3c/div\x3e")].join("")
+      }
+    }())].join(""));
     return false
   }else {
     return true
@@ -29449,8 +29454,15 @@ hylyht.login.validate_email = function validate_email(email) {
 };
 hylyht.login.validate_password = function validate_password(password) {
   domina.destroy_BANG_.call(null, domina.by_class.call(null, "password"));
-  if(cljs.core.not.call(null, cljs.core.re_matches.call(null, hylyht.login._STAR_password_re_STAR_, domina.value.call(null, password)))) {
-    domina.append_BANG_.call(null, domina.by_id.call(null, "loginForm"), [cljs.core.str('\x3cdiv class\x3d"help password"\x3eWrong password\x3c/div\x3e')].join(""));
+  if(cljs.core.not.call(null, cljs.core.re_matches.call(null, cljs.core.re_pattern.call(null, domina.attr.call(null, password, new cljs.core.Keyword(null, "pattern", "pattern", 4517781250))), domina.value.call(null, password)))) {
+    domina.append_BANG_.call(null, domina.by_id.call(null, "loginForm"), [cljs.core.str(function() {
+      var attrs5740 = domina.attr.call(null, password, new cljs.core.Keyword(null, "title", "title", 1124275658));
+      if(cljs.core.map_QMARK_.call(null, attrs5740)) {
+        return[cljs.core.str("\x3cdiv"), cljs.core.str(hiccups.runtime.render_attr_map.call(null, cljs.core.merge.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "id", "id", 1013907597), null, new cljs.core.Keyword(null, "class", "class", 1108647146), "help password"], true), attrs5740))), cljs.core.str("\x3e"), cljs.core.str("\x3c/div\x3e")].join("")
+      }else {
+        return[cljs.core.str('\x3cdiv class\x3d"help password"\x3e'), cljs.core.str(hiccups.runtime.render_html.call(null, attrs5740)), cljs.core.str("\x3c/div\x3e")].join("")
+      }
+    }())].join(""));
     return false
   }else {
     return true
