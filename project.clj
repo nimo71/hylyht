@@ -9,7 +9,10 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2014"]
                  [domina "1.0.3-SNAPSHOT"]
-                 [hiccups "0.2.0"]]
+                 [hiccups "0.2.0"]
+                 [com.cemerick/valip "0.3.2"]
+                 [org.clojars.magomimmo/shoreleave-remote-ring "0.3.1-SNAPSHOT"]
+                 [org.clojars.magomimmo/shoreleave-remote "0.3.1-SNAPSHOT"]]
 
   ;; lein-cljsbuild plugin to build a CLJS project
   :plugins [[lein-cljsbuild "1.0.0"]
@@ -31,4 +34,5 @@
                            :optimizations :whitespace
 
                            ;; generated JS code prettyfication
-                           :pretty-print true}}]})
+                           :pretty-print true}}]
+              :crossovers [valip.core valip.predicates hylyht.login.validators]})
