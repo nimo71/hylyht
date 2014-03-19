@@ -19,7 +19,7 @@
             [lein-ring "0.8.8"]
             [compojure "1.1.6"]]
 
-  :ring {:handler hylyht.core/handler}
+  :ring {:handler hylyht.remotes/app}
 
   ;; cljsbuild options configuration
   :cljsbuild {:builds

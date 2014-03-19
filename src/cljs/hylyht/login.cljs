@@ -1,17 +1,29 @@
 (ns hylyht.login
-  (:require-macros [hiccups.core :refer [html]])
+  (:require-macros [hiccups.core :refer [html]]
+                   [shoreleave.remotes.macros :as shore-macros])
   (:require [domina :refer [by-id by-class value append! prepend! destroy! attr log]]
             [domina.events :refer [listen! prevent-default]]
             [hiccups.runtime :as hiccupsrt]
-            [hylyht.login.validators :refer [user-credential-errors]]))
+            [hylyht.login.validators :refer [user-credential-errors]]
+            [shoreleave.remotes.http-rpc :refer [remote-callback]]))
 
+(defn validate-email-domain [email]
+  (remote-callback :email-domain-errors
+                   [email]
+                   #(if %
+                      (do
+                        (prepend! (by-id "loginForm")
+                                  (html [:div.help.email "The email domain doesn't exist."]))
+                        false)
+                      true)))
+                      
 (defn validate-email [email]
   (destroy! (by-class "email"))
   (if-let [errors (:email (user-credential-errors (value email) nil))]
     (do
       (prepend! (by-id "loginForm") (html [:div.help.email (first errors)]))
       false)
-    true))
+    (validate-email-domain (value email))))
 
 (defn validate-password [password]
   (destroy! (by-class "password"))
