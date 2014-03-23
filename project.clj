@@ -7,7 +7,7 @@
   ;; CLJ AND CLJS source code path
   :source-paths ["src/clj" "src/cljs"]
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2014"]
+                 [org.clojure/clojurescript "0.0-2173"]
                  [domina "1.0.3-SNAPSHOT"]
                  [hiccups "0.2.0"]
                  [com.cemerick/valip "0.3.2"]
