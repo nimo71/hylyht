@@ -13,3 +13,6 @@
 (defn form [attr & children]
   (assert (subset? (keys attr) form-attributes))
   (apply el :form attr children))
+
+(defn input [attr]
+  (el :input attr))
