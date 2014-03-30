@@ -1,6 +1,7 @@
 (ns hylyht.html-test
   (:require [clojure.test :refer :all]
-            [hylyht.html :refer :all]))
+            [hylyht.html :refer :all]
+            [hylyht.markup :refer [el]]))
 
 (deftest creates-p
   (testing "Creates p html element"
@@ -22,9 +23,13 @@
 
   (testing "Creates with input elements"
     (is (= [:form {} [[:input {:type "text", :name "t1"} []]
-                    [:input {:type "text", :name "t2"} []]]]
+                      [:input {:type "text", :name "t2"} []]]]
            (form {} (input {:type "text", :name "t1"})
-                    (input {:type "text", :name "t2"}))))))
+                    (input {:type "text", :name "t2"})))))
+
+  (testing "Assert form children are correct element types"
+    (is (thrown? AssertionError
+          (form {} (el :unknown {}))))))
 
 (deftest creates-input
   (testing "Creates empty input"
