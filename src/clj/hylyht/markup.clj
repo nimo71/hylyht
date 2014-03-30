@@ -1,7 +1,8 @@
 (ns hylyht.markup)
 
 (defn el [el-name attrs & children]
-  [el-name attrs children])
+  (assert keyword? el-name)
+  [el-name attrs (into [] children)])
 
 ;;TODO: probably need to optimise, use reduce?
 (defn attr-str [attr-map]
@@ -11,7 +12,7 @@
 
 ;;TODO: content should be optional, if not there then element should take the form <name attr="value" .../>
 (defn element-str [el]
-  (let [tagname (first el)
+  (let [tagname (name (first el))
         attrs (second el)
         children (last el)
         open-tag (str "<" tagname " " (attr-str attrs) ">")
