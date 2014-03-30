@@ -38,4 +38,5 @@
                            :pretty-print true}}]
                 :crossovers [valip.core valip.predicates
                              hylyht.login.validators
-                             hylyht.markup]})
+                             hylyht.markup
+                             hylyht.html]})

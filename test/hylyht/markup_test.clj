@@ -2,16 +2,34 @@
   (:require [clojure.test :refer :all]
             [hylyht.markup :refer :all]))
 
-(deftest test-element-constructor
-  (testing "Elements are constructed"
-    (is (= ["tagname" {:a1 "v1", :a2 "v2"} "content"]
-           (element "tagname" {:a1 "v1", :a2 "v2"} "content")))))
+(deftest constructs-element
 
-(deftest test-attr-str
-  (testing "Attributes takes a map and creates markup attributes"
+  (testing "Elements with string content are constructed"
+    (is (= ["t" {:a1 "v1", :a2 "v2"} '("content")]
+           (el "t" {:a1 "v1", :a2 "v2"} "content"))))
+
+  (testing "Elements with single element children are constructed"
+    (is (= ["t1" {:a1 "v1"} '(["t2" {:a2 "v2"} ("content")])]
+           (el "t1" {:a1 "v1"}
+               (el "t2" {:a2 "v2"} "content")))))
+
+  (testing "Elements with multiple element children are constructed"
+    (is (= ["t1" {:a1 "v1"}
+              '(["t2" {:a2 "v2"} ("c2")]
+                ["t3" {:a3 "v3"} ("c3")])]
+           (el "t1" {:a1 "v1"}
+               (el "t2" {:a2 "v2"} "c2")
+               (el "t3" {:a3 "v3"} "c3"))))))
+
+;(deftest prepends-to-selected-element
+;  (testing "prepends the given content to the elements matching the selector"
+;    (is )))
+
+(deftest creates-attr-str
+  (testing "Takes a map and creates name value pair strings for markup"
     (is (= "a1=\"v1\" a2=\"v2\"" (attr-str {:a1 "v1", :a2 "v2"})))))
 
-(deftest test-element-str
-  (testing "Creates an elements markup string")
+(deftest creates-element-str
+  (testing "Creates a markup string form an element"
     (is (= "<el a1=\"v1\" a2=\"v2\">content</el>"
-           (element-str "el" {:a1 "v1", :a2 "v2"} "content"))))
+           (element-str (el "el" {:a1 "v1", :a2 "v2"} "content"))))))

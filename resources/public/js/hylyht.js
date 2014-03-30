@@ -23254,32 +23254,51 @@ cljs.core.special_symbol_QMARK_ = function special_symbol_QMARK_(x) {
 };
 goog.provide("hylyht.markup");
 goog.require("cljs.core");
-hylyht.markup.element = function element(el_name, attributes, content) {
-  return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [el_name, attributes, content], null);
-};
+hylyht.markup.el = function() {
+  var el__delegate = function(el_name, attrs, children) {
+    return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [el_name, attrs, children], null);
+  };
+  var el = function(el_name, attrs, var_args) {
+    var children = null;
+    if (arguments.length > 2) {
+      children = cljs.core.array_seq(Array.prototype.slice.call(arguments, 2), 0);
+    }
+    return el__delegate.call(this, el_name, attrs, children);
+  };
+  el.cljs$lang$maxFixedArity = 2;
+  el.cljs$lang$applyTo = function(arglist__7202) {
+    var el_name = cljs.core.first(arglist__7202);
+    arglist__7202 = cljs.core.next(arglist__7202);
+    var attrs = cljs.core.first(arglist__7202);
+    var children = cljs.core.rest(arglist__7202);
+    return el__delegate(el_name, attrs, children);
+  };
+  el.cljs$core$IFn$_invoke$arity$variadic = el__delegate;
+  return el;
+}();
 hylyht.markup.attr_str = function attr_str(attr_map) {
   var attr_strings = cljs.core.reverse.call(null, function() {
-    var iter__4174__auto__ = function iter__7210(s__7211) {
+    var iter__4174__auto__ = function iter__7211(s__7212) {
       return new cljs.core.LazySeq(null, function() {
-        var s__7211__$1 = s__7211;
+        var s__7212__$1 = s__7212;
         while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__7211__$1);
+          var temp__4092__auto__ = cljs.core.seq.call(null, s__7212__$1);
           if (temp__4092__auto__) {
-            var s__7211__$2 = temp__4092__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__7211__$2)) {
-              var c__4172__auto__ = cljs.core.chunk_first.call(null, s__7211__$2);
+            var s__7212__$2 = temp__4092__auto__;
+            if (cljs.core.chunked_seq_QMARK_.call(null, s__7212__$2)) {
+              var c__4172__auto__ = cljs.core.chunk_first.call(null, s__7212__$2);
               var size__4173__auto__ = cljs.core.count.call(null, c__4172__auto__);
-              var b__7213 = cljs.core.chunk_buffer.call(null, size__4173__auto__);
+              var b__7214 = cljs.core.chunk_buffer.call(null, size__4173__auto__);
               if (function() {
-                var i__7212 = 0;
+                var i__7213 = 0;
                 while (true) {
-                  if (i__7212 < size__4173__auto__) {
-                    var vec__7216 = cljs.core._nth.call(null, c__4172__auto__, i__7212);
-                    var k = cljs.core.nth.call(null, vec__7216, 0, null);
-                    var v = cljs.core.nth.call(null, vec__7216, 1, null);
-                    cljs.core.chunk_append.call(null, b__7213, [cljs.core.str(" "), cljs.core.str(cljs.core.name.call(null, k)), cljs.core.str('\x3d"'), cljs.core.str(v), cljs.core.str('"')].join(""));
-                    var G__7218 = i__7212 + 1;
-                    i__7212 = G__7218;
+                  if (i__7213 < size__4173__auto__) {
+                    var vec__7217 = cljs.core._nth.call(null, c__4172__auto__, i__7213);
+                    var k = cljs.core.nth.call(null, vec__7217, 0, null);
+                    var v = cljs.core.nth.call(null, vec__7217, 1, null);
+                    cljs.core.chunk_append.call(null, b__7214, [cljs.core.str(" "), cljs.core.str(cljs.core.name.call(null, k)), cljs.core.str('\x3d"'), cljs.core.str(v), cljs.core.str('"')].join(""));
+                    var G__7219 = i__7213 + 1;
+                    i__7213 = G__7219;
                     continue;
                   } else {
                     return true;
@@ -23287,15 +23306,15 @@ hylyht.markup.attr_str = function attr_str(attr_map) {
                   break;
                 }
               }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7213), iter__7210.call(null, cljs.core.chunk_rest.call(null, s__7211__$2)));
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7214), iter__7211.call(null, cljs.core.chunk_rest.call(null, s__7212__$2)));
               } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7213), null);
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7214), null);
               }
             } else {
-              var vec__7217 = cljs.core.first.call(null, s__7211__$2);
-              var k = cljs.core.nth.call(null, vec__7217, 0, null);
-              var v = cljs.core.nth.call(null, vec__7217, 1, null);
-              return cljs.core.cons.call(null, [cljs.core.str(" "), cljs.core.str(cljs.core.name.call(null, k)), cljs.core.str('\x3d"'), cljs.core.str(v), cljs.core.str('"')].join(""), iter__7210.call(null, cljs.core.rest.call(null, s__7211__$2)));
+              var vec__7218 = cljs.core.first.call(null, s__7212__$2);
+              var k = cljs.core.nth.call(null, vec__7218, 0, null);
+              var v = cljs.core.nth.call(null, vec__7218, 1, null);
+              return cljs.core.cons.call(null, [cljs.core.str(" "), cljs.core.str(cljs.core.name.call(null, k)), cljs.core.str('\x3d"'), cljs.core.str(v), cljs.core.str('"')].join(""), iter__7211.call(null, cljs.core.rest.call(null, s__7212__$2)));
             }
           } else {
             return null;
@@ -23309,8 +23328,26 @@ hylyht.markup.attr_str = function attr_str(attr_map) {
   var attr_string = cljs.core.apply.call(null, cljs.core.str, attr_strings);
   return cljs.core.subs.call(null, attr_string, 1);
 };
-hylyht.markup.element_str = function element_str(tagname, attr, content) {
-  return[cljs.core.str("\x3c"), cljs.core.str(tagname), cljs.core.str(" "), cljs.core.str(hylyht.markup.attr_str.call(null, attr)), cljs.core.str("\x3e"), cljs.core.str(content), cljs.core.str("\x3c/"), cljs.core.str(tagname), cljs.core.str("\x3e")].join("");
+hylyht.markup.element_str = function element_str(el) {
+  var tagname = cljs.core.first.call(null, el);
+  var attrs = cljs.core.second.call(null, el);
+  var children = cljs.core.last.call(null, el);
+  var open_tag = [cljs.core.str("\x3c"), cljs.core.str(tagname), cljs.core.str(" "), cljs.core.str(hylyht.markup.attr_str.call(null, attrs)), cljs.core.str("\x3e")].join("");
+  var close_tag = [cljs.core.str("\x3c/"), cljs.core.str(tagname), cljs.core.str("\x3e")].join("");
+  return[cljs.core.str(open_tag), cljs.core.str(cljs.core.reduce.call(null, function(acc, child) {
+    return[cljs.core.str(acc), cljs.core.str(typeof child === "string" ? child : element_str.call(null, child))].join("");
+  }, children)), cljs.core.str(close_tag)].join("");
+};
+goog.provide("hylyht.html");
+goog.require("cljs.core");
+goog.require("hylyht.markup");
+goog.require("hylyht.markup");
+hylyht.html.p = function p(content) {
+  if (typeof content === "string") {
+  } else {
+    throw new Error([cljs.core.str("Assert failed: "), cljs.core.str(cljs.core.pr_str.call(null, cljs.core.list(new cljs.core.Symbol(null, "string?", "string?", 772676615, null), new cljs.core.Symbol(null, "content", "content", -689000910, null))))].join(""));
+  }
+  return hylyht.markup.el.call(null, "p", cljs.core.PersistentArrayMap.EMPTY, content);
 };
 goog.provide("goog.dom.classes");
 goog.require("goog.array");
@@ -29573,8 +29610,10 @@ if (cljs.core.truth_(typeof HTMLCollection != "undefined")) {
 }
 ;goog.provide("hylyht.main");
 goog.require("cljs.core");
-goog.require("domina");
 goog.require("hylyht.markup");
+goog.require("domina");
+goog.require("hylyht.html");
+goog.require("hylyht.html");
 goog.require("hylyht.markup");
 goog.require("domina");
 hylyht.main.init = function init() {
@@ -29582,8 +29621,8 @@ hylyht.main.init = function init() {
 };
 goog.exportSymbol("hylyht.main.init", hylyht.main.init);
 hylyht.main.build_content = function build_content() {
-  var content = hylyht.markup.element.call(null, "p", cljs.core.PersistentArrayMap.EMPTY, "Hello hylyht!");
-  return hylyht.main.attribute_str.call(null, content);
+  var content = hylyht.html.p.call(null, "Hello hylyht!");
+  return hylyht.markup.element_str.call(null, content);
 };
 goog.provide("goog.events.EventTarget");
 goog.require("goog.Disposable");

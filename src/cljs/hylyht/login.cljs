@@ -16,7 +16,7 @@
                                   (html [:div.help.email "The email domain doesn't exist."]))
                         false)
                       true)))
-                      
+
 (defn validate-email [email]
   (destroy! (by-class "email"))
   (if-let [errors (:email (user-credential-errors (value email) nil))]
