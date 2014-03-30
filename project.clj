@@ -12,12 +12,13 @@
                  [hiccups "0.2.0"]
                  [com.cemerick/valip "0.3.2"]
                  [org.clojars.magomimmo/shoreleave-remote-ring "0.3.1-SNAPSHOT"]
-                 [org.clojars.magomimmo/shoreleave-remote "0.3.1-SNAPSHOT"]]
+                 [org.clojars.magomimmo/shoreleave-remote "0.3.1-SNAPSHOT"]
+                 [javax.servlet/servlet-api "2.5"]
+                 [compojure "1.1.6"]]
 
   ;; lein-cljsbuild plugin to build a CLJS project
   :plugins [[lein-cljsbuild "1.0.0"]
-            [lein-ring "0.8.8"]
-            [compojure "1.1.6"]]
+            [lein-ring "0.8.8"]]
 
   :ring {:handler hylyht.remotes/app}
 
@@ -35,4 +36,6 @@
 
                            ;; generated JS code prettyfication
                            :pretty-print true}}]
-              :crossovers [valip.core valip.predicates hylyht.login.validators]})
+                :crossovers [valip.core valip.predicates
+                             hylyht.login.validators
+                             hylyht.markup]})

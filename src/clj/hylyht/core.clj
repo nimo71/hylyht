@@ -6,7 +6,7 @@
 
 (defroutes app-routes
   ;; to serve document root address
-  (GET "/" [] "<p>Hello from compojure</p>")
+  ;;(GET "/" [] "<p>Hello from compojure</p>")
   (POST "/login" [email password] (authenticate-user email password))
   (resources "/")
   (not-found "Page non found"))
