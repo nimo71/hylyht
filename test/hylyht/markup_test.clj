@@ -30,6 +30,23 @@
     (is (= "a1=\"v1\" a2=\"v2\"" (attr-str {:a1 "v1", :a2 "v2"})))))
 
 (deftest creates-element-str
+
   (testing "Creates a markup string form an element"
     (is (= "<el a1=\"v1\" a2=\"v2\">content</el>"
-           (element-str (el "el" {:a1 "v1", :a2 "v2"} "content"))))))
+           (element-str (el :el {:a1 "v1", :a2 "v2"} "content")))))
+
+  (testing "Creates a markup string from an element without children"
+    (is (= "<tag id=\"attr\"></tag>"
+           (element-str (el :tag {:id "attr"})))))
+
+  (testing "Creates a markup string from an element with one child"
+    (is (= "<tag id=\"attr\"><child id=\"child\"></child></tag>"
+           (element-str (el :tag {:id "attr"}
+                            (el :child {:id "child"}))))))
+
+  (testing "Creates a markup string from an element with multiple children"
+    (is (= "<tag id=\"attr\"><child id=\"child1\"></child><child id=\"child2\"></child><child id=\"child3\"></child></tag>"
+           (element-str (el :tag {:id "attr"}
+                            (el :child {:id "child1"})
+                            (el :child {:id "child2"})
+                            (el :child {:id "child3"})))))))

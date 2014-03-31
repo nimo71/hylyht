@@ -12,17 +12,19 @@
 
 ;;TODO: content should be optional, if not there then element should take the form <name attr="value" .../>
 (defn element-str [el]
-  (let [tagname (name (first el))
+  (let [tagname (str (name (first el)))
         attrs (second el)
         children (last el)
         open-tag (str "<" tagname " " (attr-str attrs) ">")
         close-tag (str "</" tagname ">")]
 
     (str open-tag
-      (reduce (fn [acc child]
-                (str acc
-                  (if (string? child)
-                    child
-                    (element-str child))))
-              children)
-      close-tag)))
+         (if (seq children)
+           (reduce (fn [markup child]
+               (str markup
+                    (if (string? child)
+                      child
+                      (element-str child))))
+               ""
+               children))
+         close-tag)))
