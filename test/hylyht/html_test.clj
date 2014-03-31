@@ -27,6 +27,10 @@
            (form {} (input {:type "text", :name "t1"})
                     (input {:type "text", :name "t2"})))))
 
+  (testing "Creates with strings"
+    (is (= [:form {} ["child"]]
+           (form {} "child"))))
+
   (testing "Assert form children are correct element types"
     (is (thrown? AssertionError
           (form {} (el :unknown {}))))))

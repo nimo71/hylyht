@@ -20,7 +20,8 @@
   (subset? (keys attr) allowed-form-attributes))
 
 (defn allowed-form-children? [children]
-  (subset? (reduce #(conj %1 (first %2)) #{} children) allowed-form-children)) ;TODO: Use into?
+  (let [child-tags (filter #(not (string? %1)) children)]
+    (subset? (reduce #(conj %1 (first %2)) #{} child-tags) allowed-form-children))) ;TODO: Use into?
 
 (defn form [attr & children]
   (assert (allowed-form-attributes? attr))

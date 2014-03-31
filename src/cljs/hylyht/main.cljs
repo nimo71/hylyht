@@ -13,5 +13,7 @@
 
 (defn login-form []
   (form {:id "login_form" :method "post", :action "/login"}
+    "Username: "
     (input {:type "text", :id "username"})
+    "Password: "
     (input {:type "text", :id "password"})))
