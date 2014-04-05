@@ -4,14 +4,22 @@
   (assert keyword? el-name)
   [el-name attrs (into [] children)])
 
+; (defn separate-attrs-and-children [& params]
+;  (loop [attrs-then-children params, attrs {}]
+;
+;    (let [attr-name (first attrs-then-children)
+;          attr-value (second attrs-then-children)]
+;
+;      (if (and (keyword? attr-name) (string? attr-value))
+;        (recur (rest(rest attrs-then-children)) (assoc attrs attr-name attr-value));(nthrest attrs-then-children 2) (assoc attrs attr-name attr-value))
+;        {:attributes attrs, :children attrs-then-children}))))
+
 (defn separate-attrs-and-children [& params]
-  (loop [attrs-then-children params, attrs {}]
-
-    (let [attr-name (first attrs-then-children)
-          attr-value (second attrs-then-children)]
-
+  (loop [attrs-then-children params
+         attrs {}]
+    (let [[attr-name attr-value & remainder] attrs-then-children]
       (if (and (keyword? attr-name) (string? attr-value))
-        (recur (nthrest attrs-then-children 2) (assoc attrs attr-name attr-value))
+        (recur remainder (assoc attrs attr-name attr-value))
         {:attributes attrs, :children attrs-then-children}))))
 
 (defn element [el-name & attrs-then-children]

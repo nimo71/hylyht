@@ -5,12 +5,9 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2197"]
+                 [org.clojure/clojurescript "0.0-2202"]
                  [domina "1.0.3-SNAPSHOT"]
                  [hiccups "0.2.0"]
-                 [com.cemerick/valip "0.3.2"]
-                 [org.clojars.magomimmo/shoreleave-remote-ring "0.3.1-SNAPSHOT"]
-                 [org.clojars.magomimmo/shoreleave-remote "0.3.1-SNAPSHOT"]
                  [javax.servlet/servlet-api "2.5"]
                  [compojure "1.1.6"]]
 
@@ -18,11 +15,11 @@
             [lein-ring "0.8.8"]
             [com.keminglabs/cljx "0.3.2"]]
 
-  :ring {:handler hylyht.remotes/app}
+  :ring {:handler hylyht.core/handler}
 
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "target/classes"]
 
-  :test-paths ["target/test-classes"] ;["test/clj" "test/cljs"]
+  :test-paths ["test/clj" "target/classes"] ; "target/test-classes"]
 
   :cljx {:builds [{:source-paths ["src/cljx"]
                    :output-path "target/classes"
@@ -40,7 +37,7 @@
                    :output-path "target/test-classes"
                    :rules :cljs}]}
 
-  :cljsbuild {:builds [{:source-paths ["src/cljs" "target/classes" "target/test-classes"] ;["src/cljs"]
+  :cljsbuild {:builds [{:source-paths ["src/cljs" "target/classes"] ;["src/cljs"]
 
                         ;; Google Closure (CLS) options configuration
                         :compiler {:output-to "resources/public/js/hylyht.js"
@@ -48,3 +45,5 @@
                                    :pretty-print true}}]}
 
   :hooks [cljx.hooks])
+
+;  :aliases { build-run ["do" "clean," "cljsbuild" "clean," "cljx" "once," "cljsbuild" "once," "ring" "server-headless"]})

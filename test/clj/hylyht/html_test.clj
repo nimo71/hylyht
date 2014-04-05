@@ -1,7 +1,7 @@
 (ns hylyht.html-test
   (:require [clojure.test :refer :all]
             [hylyht.html :refer :all]
-            [hylyht.markup :refer [el]]))
+            [hylyht.markup :refer [element element-str]]))
 
 (deftest creates-p
   (testing "Creates p html element"
@@ -33,7 +33,7 @@
 
   (testing "Assert form children are correct element types"
     (is (thrown? AssertionError
-          (form {} (el :unknown "value"))))))
+          (form {} (element :unknown "value"))))))
 
 (deftest creates-input
   (testing "Creates empty input"
@@ -52,3 +52,13 @@
              (input :id "username" :type "text")
              "Password: "
              (input  :id "password" :type "text"))))))
+
+
+;(deftest creates-form-string
+;    (testing "Creates form string"
+;    (is (= ""
+;           (element-str (form :id "login_form" :action "/login" :method "post"
+;             "Username: "
+;             (input :id "username" :type "text")
+;             "Password: "
+;             (input  :id "password" :type "text")))))))
