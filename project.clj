@@ -4,8 +4,6 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  ;; CLJ AND CLJS source code path
-  :source-paths ["src/clj" "src/cljs"]
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2197"]
                  [domina "1.0.3-SNAPSHOT"]
@@ -16,27 +14,37 @@
                  [javax.servlet/servlet-api "2.5"]
                  [compojure "1.1.6"]]
 
-  ;; lein-cljsbuild plugin to build a CLJS project
-  :plugins [[lein-cljsbuild "1.0.0"]
-            [lein-ring "0.8.8"]]
+  :plugins [[lein-cljsbuild "1.0.3"]
+            [lein-ring "0.8.8"]
+            [com.keminglabs/cljx "0.3.2"]]
 
   :ring {:handler hylyht.remotes/app}
 
-  ;; cljsbuild options configuration
-  :cljsbuild {:builds
-              [{;; CLJS source code path
-                :source-paths ["src/cljs"]
+  :source-paths ["src/clj"]
 
-                ;; Google Closure (CLS) options configuration
-                :compiler {;; CLS generated JS script filename
-                           :output-to "resources/public/js/hylyht.js"
+  :test-paths ["target/test-classes"] ;["test/clj" "test/cljs"]
 
-                           ;; minimal JS optimization directive
-                           :optimizations :whitespace
+  :cljx {:builds [{:source-paths ["src/cljx"]
+                   :output-path "target/classes"
+                   :rules :clj}
 
-                           ;; generated JS code prettyfication
-                           :pretty-print true}}]
-                :crossovers [valip.core valip.predicates
-                             hylyht.login.validators
-                             hylyht.markup
-                             hylyht.html]})
+                  {:source-paths ["src/cljx"]
+                   :output-path "target/classes"
+                   :rules :cljs}
+
+                  {:source-paths ["test/cljx"]
+                   :output-path "target/test-classes"
+                   :rules :clj}
+
+                  {:source-paths ["test/cljx"]
+                   :output-path "target/test-classes"
+                   :rules :cljs}]}
+
+  :cljsbuild {:builds [{:source-paths ["src/cljs" "target/classes" "target/test-classes"] ;["src/cljs"]
+
+                        ;; Google Closure (CLS) options configuration
+                        :compiler {:output-to "resources/public/js/hylyht.js"
+                                   :optimizations :whitespace
+                                   :pretty-print true}}]}
+
+  :hooks [cljx.hooks])

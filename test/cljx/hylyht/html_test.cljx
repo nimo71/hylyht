@@ -33,9 +33,22 @@
 
   (testing "Assert form children are correct element types"
     (is (thrown? AssertionError
-          (form {} (el :unknown {}))))))
+          (form {} (el :unknown "value"))))))
 
 (deftest creates-input
   (testing "Creates empty input"
     (is (= [:input {:type "text", :name "t1"} []]
            (input {:type "text", :name "t1"})))))
+
+(deftest creates-form
+  (testing "Creates form"
+    (is (= [:form {:method "post", :action "/login", :id "login_form"}
+             ["Username: "
+              [:input {:id "username", :type "text"} []]
+              "Password: "
+              [:input {:id "password", :type "text"} []]]]
+           (form :id "login_form" :action "/login" :method "post"
+             "Username: "
+             (input :id "username" :type "text")
+             "Password: "
+             (input  :id "password" :type "text"))))))
