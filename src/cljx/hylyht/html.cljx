@@ -1,37 +1,53 @@
 (ns hylyht.html
-  (:require [hylyht.markup :as markup]
-            [clojure.set :as cset]))
+  (:require [hylyht.markup :refer [element]]
+            [clojure.set :refer [union subset?]]))
+
+;;TODO: Consider namespace for each element?
+;;TODO: Should children be restricted? Maybe have strict mode or warning?
+;;TODO: Should be able to parse html and generate markup components
 
 (def global-attributes #{:id :class})
 
 (defn p [content]
   (assert (string? content))
-  (markup/element :p {} content))
+  (element :p {} content))
 
 (def allowed-form-attributes
-  (cset/union global-attributes
+  (union global-attributes
     #{:accept :accept-charset :action :autocomplete
       :enctype :method :name :novalidate :target}))
 
 (defn allowed-form-attributes? [attr]
-  (cset/subset? (keys attr) allowed-form-attributes))
+  (subset? (keys attr) allowed-form-attributes))
 
 (def allowed-form-children
   #{:input :textarea :button :select :option :optgroup :fieldset :label})
 
 (defn allowed-form-child? [child]
   (or (string? child)
-      (contains? allowed-form-children (first child))))
+      (contains? allowed-form-children (second child))))
 
 (defn allowed-form-children? [children]
   (reduce #(and %1 (allowed-form-child? %2)) true children))
 
 (defn form [& attr-children]
-  (let [el (apply markup/element :form attr-children)
-        [_ attrs & children] el]
+  (let [el (apply element :form attr-children)
+        [_ _ attrs & children] el]
     (assert (allowed-form-attributes? attrs))
     (assert (apply allowed-form-children? children))
     el))
 
 (defn input [& attr]
-  (apply markup/element :input attr))
+  (apply element :input attr))
+
+(defn label [& attr-children]
+  (apply element :label attr-children))
+
+(defn html [& children]
+  (apply element :html children))
+
+(defn head [& children]
+  (apply element :head children))
+
+(defn body [& children]
+  (apply element :body children))

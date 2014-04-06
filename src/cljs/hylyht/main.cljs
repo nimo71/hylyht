@@ -1,7 +1,7 @@
 (ns hylyht.main
   (:require [domina :refer [append! by-id]]
             [hylyht.markup :refer [element-str]]
-            [hylyht.html :refer [form input]]))
+            [hylyht.html :refer [form input label]]))
 
 (defn ^:export init []
   (append! (by-id "content")
@@ -15,7 +15,7 @@
 
 (defn login-form []
   (form :id "login_form" :method "post" :action "/login"
-    "Username: "
+    (label :for "username" "Username: ")
     (input :type "text" :id "username")
-    "Password: "
+    (label :for "password" "Password: ")
     (input :type "text" :id "password")))

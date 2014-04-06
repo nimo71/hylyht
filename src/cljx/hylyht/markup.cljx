@@ -1,18 +1,10 @@
 (ns hylyht.markup)
 
+;;TODO: create markup package with element and attribute namespaces
+
 (defn el [el-name attrs & children]
   (assert keyword? el-name)
-  [el-name attrs (into [] children)])
-
-; (defn separate-attrs-and-children [& params]
-;  (loop [attrs-then-children params, attrs {}]
-;
-;    (let [attr-name (first attrs-then-children)
-;          attr-value (second attrs-then-children)]
-;
-;      (if (and (keyword? attr-name) (string? attr-value))
-;        (recur (rest(rest attrs-then-children)) (assoc attrs attr-name attr-value));(nthrest attrs-then-children 2) (assoc attrs attr-name attr-value))
-;        {:attributes attrs, :children attrs-then-children}))))
+  [:element el-name attrs (into [] children)])
 
 (defn separate-attrs-and-children [& params]
   (loop [attrs-then-children params
@@ -37,14 +29,14 @@
         attr-string (apply str attr-strings)]
     (subs attr-string 1)))
 
-;;TODO: content should be optional, if not there then element should take the form <name attr="value" .../>
+;;TODO: content should be optional, if no content could take the form <name attr="value" .../>
 (defn element-str [el]
-  (let [tagname (str (name (first el)))
-        attrs (second el)
-        children (last el)
-        open-tag (str "<" tagname " " (attr-str attrs) ">")
-        close-tag (str "</" tagname ">")]
+  (let [[kind tag attrs children] el
+         tagname (name tag)
+         open-tag (str "<" tagname " " (attr-str attrs) ">")
+         close-tag (str "</" tagname ">")]
 
+    (assert (= kind :element))
     (str open-tag
          (if (seq children)
            (reduce (fn [markup child]

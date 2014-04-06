@@ -5,22 +5,22 @@
 (deftest constructs-element
 
   (testing "Elements with string content are constructed"
-    (is (= [:t {:a1 "v1", :a2 "v2"} ["content"]]
+    (is (= [:element :t {:a1 "v1", :a2 "v2"} ["content"]]
            (element :t {:a1 "v1", :a2 "v2"} "content"))))
 
   (testing "Elements are constructed without attr map"
-    (is (= [:t {:a1 "v1", :a2 "v2"} ["content"]]
+    (is (= [:element :t {:a1 "v1", :a2 "v2"} ["content"]]
            (element :t :a1 "v1" :a2 "v2" "content"))))
 
   (testing "Elements with single element children are constructed"
-    (is (= [:t1 {:a1 "v1"} [[:t2 {:a2 "v2"} ["content"]]]]
+    (is (= [:element :t1 {:a1 "v1"} [[:element :t2 {:a2 "v2"} ["content"]]]]
            (element :t1 {:a1 "v1"}
                (element :t2 {:a2 "v2"} "content")))))
 
   (testing "Elements with multiple element children are constructed"
-    (is (= [:t1 {:a1 "v1"}
-              [[:t2 {:a2 "v2"} ["c2"]]
-               [:t3 {:a3 "v3"} ["c3"]]]]
+    (is (= [:element :t1 {:a1 "v1"}
+              [[:element :t2 {:a2 "v2"} ["c2"]]
+               [:element :t3 {:a3 "v3"} ["c3"]]]]
            (element :t1 {:a1 "v1"}
                (element :t2 {:a2 "v2"} "c2")
                (element :t3 {:a3 "v3"} "c3"))))))
@@ -54,3 +54,9 @@
                             (element :child {:id "child1"})
                             (element :child {:id "child2"})
                             (element :child {:id "child3"})))))))
+
+(deftest creates-declaration
+  (testing "declaration is constructed"
+    (is (= []))))
+
+;(deftest creates-comment)
