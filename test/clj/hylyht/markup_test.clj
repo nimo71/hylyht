@@ -57,6 +57,12 @@
 
 (deftest creates-declaration
   (testing "declaration is constructed"
-    (is (= []))))
+    (is (= [:declaration ["!DOCTYPE" "html"]]
+           (declaration "!DOCTYPE" "html")))))
+
+(deftest creates-declaration-str
+  (testing "Creates a declaration string"
+    (is (= "<!DOCTYPE html>"
+           (declaration-str (declaration "!DOCTYPE" "html"))))))
 
 ;(deftest creates-comment)

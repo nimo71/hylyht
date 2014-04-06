@@ -47,3 +47,11 @@
                ""
                children))
          close-tag)))
+
+(defn declaration [& decs]
+  [:declaration (vec decs)])
+
+(defn declaration-str [declaration]
+  (let [[kind decs] declaration]
+    (assert (= kind :declaration))
+    (str "<" (reduce #(str %1 " " %2) decs) ">")))

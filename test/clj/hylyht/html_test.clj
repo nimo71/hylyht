@@ -53,12 +53,3 @@
              "Password: "
              (input  :id "password" :type "text"))))))
 
-
-;(deftest creates-form-string
-;    (testing "Creates form string"
-;    (is (= ""
-;           (element-str (form :id "login_form" :action "/login" :method "post"
-;             "Username: "
-;             (input :id "username" :type "text")
-;             "Password: "
-;             (input  :id "password" :type "text")))))))
