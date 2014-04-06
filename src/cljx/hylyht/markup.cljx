@@ -35,15 +35,15 @@
       (str "<" (subs (reduce #(str %1 " " %2) "" decs) 1) ">"))))
 
 (defn <!-- [comment]
-  [:comment :<!-- comment])
+  [:comment [:<!-- comment]])
 
 (defn comment-str [comment]
-  (let [[kind _ content] comment]
+  (let [[kind [_ content]] comment]
     (str "<!--" comment "-->")))
 
 (defn el [el-name attrs & children]
   (assert keyword? el-name)
-  [:element el-name attrs (into [] children)])
+  [:element [el-name attrs (into [] children)]])
 
 (defn element [el-name & attrs-then-children]
   (if (map? (first attrs-then-children))
@@ -56,7 +56,7 @@
 
 ;;TODO: content should be optional, if no content could take the form <name attr="value" .../>
 (defn element-str [el]
-  (let [[kind tag attrs children] el
+  (let [[kind [tag attrs children]] el
          tagname (name tag)
          open-tag (str "<" tagname " " (attr-str attrs) ">")
          close-tag (str "</" tagname ">")]
@@ -74,3 +74,8 @@
          close-tag)))
 
 ;; TODO: markup-str
+(defn markup-str [& markup]
+  (reduce #(let [markup %1
+                 [kind ] %2])
+          ""
+          markup))
