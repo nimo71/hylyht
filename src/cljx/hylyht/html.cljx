@@ -13,6 +13,9 @@
 (defn meta [& attr]
   (apply declaration :meta attr))
 
+(defn title [title-str]
+   (element :title title-str))
+
 (defn html [& children]
   (apply element :html children))
 

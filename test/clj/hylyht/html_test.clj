@@ -3,7 +3,6 @@
             [hylyht.html :refer :all]
             [hylyht.markup :refer [element element-str]]))
 
-
 (deftest creates-doctype
   (testing "Creates doctype"
     (is (= [:declaration ["!DOCTYPE" "html"]]
@@ -13,6 +12,11 @@
   (testing "Creates meta declaration"
     (is (= [:declaration [:meta {:a1 "v1"}]]
            (meta :a1 "v1")))))
+
+(deftest creates-title
+  (testing "Creates title element"
+    (is (= [:element :title {} ["the title"]]
+           (title "the title")))))
 
 (deftest creates-p
   (testing "Creates p html element"

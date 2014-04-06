@@ -1,12 +1,12 @@
 (ns hylyht.page
-  (:require [hylyht.html :refer [doctype html head body]]))
+  (:require [hylyht.html :refer [doctype html head meta title body]]))
 
 (defn page []
   [(doctype "html")
    (html
      (head
       (meta :charset "utf=8")
-      )
+      (title "Hylyht"))
      (body))])
 
 (comment
