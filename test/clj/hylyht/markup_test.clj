@@ -25,10 +25,6 @@
                (element :t2 {:a2 "v2"} "c2")
                (element :t3 {:a3 "v3"} "c3"))))))
 
-;(deftest prepends-to-selected-element
-;  (testing "prepends the given content to the elements matching the selector"
-;    (is )))
-
 (deftest creates-attr-str
   (testing "Takes a map and creates name value pair strings for markup"
     (is (= "a2=\"v2\" a1=\"v1\"" (attr-str {:a1 "v1", :a2 "v2"})))))
@@ -58,11 +54,31 @@
 (deftest creates-declaration
   (testing "declaration is constructed"
     (is (= [:declaration ["!DOCTYPE" "html"]]
-           (declaration "!DOCTYPE" "html")))))
+           (declaration "!DOCTYPE" "html"))))
+
+  (testing "declaration is constructed with attributes"
+    (is (= [:declaration [:meta {:a1 "v1", :a2 "v2"}]]
+           (declaration :meta :a1 "v1" :a2 "v2")))))
 
 (deftest creates-declaration-str
-  (testing "Creates a declaration string"
+  (testing "Creates a declaration with children string"
     (is (= "<!DOCTYPE html>"
-           (declaration-str (declaration "!DOCTYPE" "html"))))))
+           (declaration-str (declaration "!DOCTYPE" "html")))))
 
-;(deftest creates-comment)
+  (testing "Creates declaration with attributes string"
+    (is (= "<meta charset=\"utf-8\">"
+           (declaration-str (declaration :meta :charset "utf-8"))))))
+
+(deftest creates-comment
+  (testing "Comment is constructed"
+    (is [:comment :<!-- "contents"]
+        (<!-- "contents"))))
+
+(deftest creates-comment-string
+  (testing "Creates comment string"
+    (is "<!-- the comment -->"
+        (<!-- "the comment"))))
+
+;(deftest prepends-to-selected-element
+;  (testing "prepends the given content to the elements matching the selector"
+;    (is )))

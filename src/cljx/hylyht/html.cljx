@@ -1,16 +1,35 @@
 (ns hylyht.html
-  (:require [hylyht.markup :refer [element]]
+  (:require [hylyht.markup :refer [element declaration]]
             [clojure.set :refer [union subset?]]))
 
-;;TODO: Consider namespace for each element?
 ;;TODO: Should children be restricted? Maybe have strict mode or warning?
 ;;TODO: Should be able to parse html and generate markup components
 
 (def global-attributes #{:id :class})
 
+(defn doctype [& declarations]
+  (apply declaration "!DOCTYPE" declarations))
+
+(defn meta [& attr]
+  (apply declaration :meta attr))
+
+(defn html [& children]
+  (apply element :html children))
+
+(defn head [& children]
+  (apply element :head children))
+
+
+
+(defn body [& children]
+  (apply element :body children))
+
 (defn p [content]
   (assert (string? content))
   (element :p {} content))
+
+
+; form element
 
 (def allowed-form-attributes
   (union global-attributes
@@ -42,12 +61,3 @@
 
 (defn label [& attr-children]
   (apply element :label attr-children))
-
-(defn html [& children]
-  (apply element :html children))
-
-(defn head [& children]
-  (apply element :head children))
-
-(defn body [& children]
-  (apply element :body children))
