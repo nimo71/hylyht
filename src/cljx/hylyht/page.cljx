@@ -5,7 +5,7 @@
   [(doctype "html")
    (html :lang "en"
      (head
-       (meta :charset "utf=8")
+       (meta :charset "utf-8")
        (title "Hylyht")
        (<!-- "lt IE 9" (script :src "http://html5shiv.googlecode.com/svn/trunk/html5.js"))
        (link :rel "stylesheet" :href "css/normalize.css")

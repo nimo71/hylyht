@@ -71,13 +71,36 @@
 
 (deftest creates-comment
   (testing "Comment is constructed"
-    (is [:comment [:<!-- "contents"]]
-        (<!-- "contents"))))
+    (is (= [:comment [:<!-- "contents"]]
+           (<!-- "contents")))))
 
 (deftest creates-comment-string
   (testing "Creates comment string"
     (is "<!-- the comment -->"
         (<!-- "the comment"))))
+
+(deftest creates-markup-string
+  (testing "Creates markup string"
+    (is (= (str "<!DOCTYPE html>"
+             "<html lang=\"en\">"
+               "<head>"
+                 "<meta charset=\"utf-8\">"
+                 "<script src=\"js/hylyht.js\"></script>"
+               "</head>"
+               "<body>"
+                 "<p>paragraph</p>"
+                 "<!--comment-->"
+               "</body>"
+             "</html>")
+           (markup-str
+             [:declaration ["!DOCTYPE" "html"]]
+             [:element [:html {:lang "en"} [
+                         [:element [:head {} [
+                           [:declaration [:meta {:charset "utf-8"}]]
+                           [:element [:script {:src "js/hylyht.js"} []]]]]]
+                         [:element [:body {} [
+                           [:element [:p {} ["paragraph"]]]
+                           [:comment [:<!-- "comment"]]]]]]]])))))
 
 ;(deftest prepends-to-selected-element
 ;  (testing "prepends the given content to the elements matching the selector"
