@@ -1,10 +1,10 @@
 (ns hylyht.main
   (:require [domina :refer [append! by-id]]
             [hylyht.markup :refer [markup-str]]
-            [hylyht.login-form :refer [create-login-form]]))
+            [hylyht.registration-form :refer [create-registration-form]]))
 
 (defn build-content []
-  (markup-str (create-login-form)))
+  (markup-str (create-registration-form)))
 
 (defn ^:export init []
   (append! (by-id "content")
