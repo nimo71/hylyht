@@ -41,11 +41,8 @@
 
                         ;; Google Closure (CLS) options configuration
                         :compiler {:output-to "resources/public/js/hylyht.js"
-                                   ;:output-dir "out"
-                                   :optimizations :none
-                                   ;:source-map true
-                                   :pretty-print true
-                                   }}]}
+                                   :optimizations :whitespace
+                                   :pretty-print true }}]}
 
 
 

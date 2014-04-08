@@ -41,10 +41,8 @@
 (defn div [& attr-children]
   (apply element :div attr-children))
 
-(defn p [content]
-  (assert (string? content))
-  (element :p {} content))
-
+(defn p [& attr-children]
+  (apply element :p attr-children))
 
 ; form element
 
