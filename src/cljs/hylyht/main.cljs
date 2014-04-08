@@ -1,17 +1,10 @@
 (ns hylyht.main
   (:require [domina :refer [append! by-id]]
             [hylyht.markup :refer [markup-str]]
-            [hylyht.html :refer [form input label]]))
-
-(defn login-form []
-  (form :id "login_form" :method "post" :action "/login"
-    (label :for "username" "Username: ")
-    (input :type "text" :id "username")
-    (label :for "password" "Password: ")
-    (input :type "text" :id "password")))
+            [hylyht.login-form :refer [create-login-form]]))
 
 (defn build-content []
-  (markup-str (login-form)))
+  (markup-str (create-login-form)))
 
 (defn ^:export init []
   (append! (by-id "content")
