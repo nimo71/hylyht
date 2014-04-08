@@ -5,7 +5,6 @@
             [hylyht.page :refer [create-page render-page]]))
 
 (defroutes app-routes
-  ;;(GET "/" [] "<p>Hello from compojure</p>")
   (GET "/index.html" [] (render-page (create-page)))
   (resources "/")
   (not-found "<h1>Page Not Found</h1>"))

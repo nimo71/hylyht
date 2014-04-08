@@ -6,4 +6,5 @@
     (label :for "username" "Username: ")
     (input :type "text" :id "username")
     (label :for "password" "Password: ")
-    (input :type "text" :id "password")))
+    (input :type "text" :id "password")
+    (input :type "submit" :id "submit_login" :value "Login")))
