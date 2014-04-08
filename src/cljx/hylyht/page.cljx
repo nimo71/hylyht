@@ -1,7 +1,8 @@
 (ns hylyht.page
-  (:require [hylyht.html :refer [doctype html head meta title <!-- script link body p div]]))
+  (:require [hylyht.html :refer [doctype html head meta title <!-- script link body p div]]
+            [hylyht.markup :refer [markup-str]]))
 
-(defn page []
+(defn create-page []
   [(doctype "html")
    (html :lang "en"
      (head
@@ -18,3 +19,5 @@
        (script :src "js/hylyht.js")
        (script "hylyht.main.init();")))])
 
+(defn render-page [page]
+  (apply markup-str page))
