@@ -81,6 +81,8 @@
                children))
          close-tag)))
 
+;;TODO: implement element, declaration and comments as protocols?
+
 (defn markup-str [& markup]
   (reduce #(let [m-str          %1
                  [kind [tag _]] %2]
