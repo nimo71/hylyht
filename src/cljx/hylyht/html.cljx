@@ -77,3 +77,6 @@
 
 (defn label [& attr-children]
   (apply element :label attr-children))
+
+(defn a [& attr-children]
+  (apply element :a attr-children))

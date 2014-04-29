@@ -87,3 +87,8 @@
   (testing "Creates empty input"
     (is (= [:element [:input {:type "text", :name "t1"} []]]
            (input {:type "text", :name "t1"})))))
+
+(deftest creates-a
+  (testing "Creates anchor"
+    (is (= [:element [:a {:href "./url.html"} ["anchor"]]]
+           (a :href "./url.html" "anchor")))))

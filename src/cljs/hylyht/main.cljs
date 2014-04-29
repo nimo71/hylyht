@@ -1,15 +1,19 @@
 (ns hylyht.main
   (:require [domina :refer [append! by-id]]
             [hylyht.markup :refer [markup-str]]
-            [hylyht.registration-form :refer [create-registration-form]]))
+            [hylyht.registration-form :as reg-form]))
 
 (defn build-content []
-  (markup-str (create-registration-form)))
+  (apply markup-str (reg-form/create)))
 
 (defn ^:export init []
   (append! (by-id "content")
-           (build-content)))
+           (build-content))
+
+  (reg-form/init))
 
 ;TODO:
-;  add html render function to traverse the markup and stringify
-;  create the whole page using cljs, the page could be represented as a monadic value and the transformations the monadic functions.
+;  * listen for navigation events and load the correct page...
+;  * remove domina and use google clojure instead, wrap clojure...
+;  * add html render function to traverse the markup and stringify
+;  * create the whole page using cljs, the page could be represented as a monadic value and the transformations the monadic functions.

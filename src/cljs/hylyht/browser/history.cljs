@@ -24,7 +24,8 @@
 (defn set-enabled [h enable]
   (.setEnabled h enable))
 
-(defn set-token [h token]
+(defn set-token
+  [h token]
   (.setToken h token))
 
 

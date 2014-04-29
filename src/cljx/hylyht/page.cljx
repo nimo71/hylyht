@@ -1,12 +1,12 @@
 (ns hylyht.page
-  (:require [hylyht.html :refer [doctype html head meta title <!-- script link body p div]]
+  (:require [hylyht.html :refer [doctype html head title <!-- script link body p div]]
             [hylyht.markup :refer [markup-str]]))
 
 (defn create-page []
   [(doctype "html")
    (html :lang "en"
      (head
-       (meta :charset "utf-8")
+       (hylyht.html/meta :charset "utf-8")
        (title "Hylyht")
        (<!-- "lt IE 9" (script :src "http://html5shiv.googlecode.com/svn/trunk/html5.js"))
        (link :rel "stylesheet" :href "css/normalize.css")
