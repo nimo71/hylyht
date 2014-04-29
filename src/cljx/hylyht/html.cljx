@@ -1,4 +1,5 @@
 (ns hylyht.html
+  (:refer-clojure :exclude [meta])
   (:require [hylyht.markup :as markup :refer [element declaration element-str]]
             [clojure.set :refer [union subset?]]))
 

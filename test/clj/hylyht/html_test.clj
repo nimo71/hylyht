@@ -1,4 +1,5 @@
 (ns hylyht.html-test
+  (:refer-clojure :exclude [meta])
   (:require [clojure.test :refer :all]
             [hylyht.html :refer :all]
             [hylyht.markup :refer [element element-str]]))
