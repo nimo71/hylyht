@@ -5,12 +5,19 @@
 
 (def ON_NAVIGATE goog.history.EventType.NAVIGATE)
 
-(defn history []
+(defn history [callback]
   (let [h (if history5/isSupported
             (goog.history.Html5History.)
             (goog.History.))]
-    (do (events/listen h ON_NAVIGATE
-          (fn [e] (js/alert (str "Navigated to state \"" (.token e) "\"")))))))
+
+    (events/listen h ON_NAVIGATE
+      (fn [e]
+        (callback {:token (keyword (.-token e))
+                   :type (.-type e)
+                   :navigation? (.-isNavigation e)})))
+
+    (set-enabled h true)
+    h))
 
 (defn dispose-internal [h]
   (.disposeInternal h))
@@ -24,11 +31,8 @@
 (defn set-enabled [h enable]
   (.setEnabled h enable))
 
-(defn set-token
-  [h token]
+(defn set-token [h token]
   (.setToken h token))
-
-
 
 
 ; add to history

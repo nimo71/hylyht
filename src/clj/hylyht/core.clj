@@ -5,7 +5,7 @@
             [hylyht.page :refer [create-page render-page]]))
 
 (defroutes app-routes
-  (GET "/index.html" [] (render-page (create-page)))
+  (GET "/app.html" [] (render-page (create-page)))
   (resources "/")
   (not-found "<h1>Page Not Found</h1>"))
 

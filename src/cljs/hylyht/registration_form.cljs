@@ -2,7 +2,7 @@
   (:require [hylyht.html :refer [a form input label]]))
 
 (defn create []
-  [(a :href "./login.html" "Login")
+  [(a :href "./app.html#login" "Login")
    (form :id "registration_form" :method "post" :action "/register"
      (label :for "username" "Username: ")
      (input :type "text" :id "username" :name "username")
@@ -19,4 +19,4 @@
      (input :type "submit" :id "submit_registration" :value "Register"))])
 
 (defn init []
-  (js/alert "reg-form/init"))
+  )
