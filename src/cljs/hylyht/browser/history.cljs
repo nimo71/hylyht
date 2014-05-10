@@ -33,22 +33,3 @@
 
 (defn set-token [h token]
   (.setToken h token))
-
-
-; add to history
-; change url in navigation bar without page request
-; back event
-
-; core.asynch rather than callbacks...
-
-; User navigates to index and app is loaded into the browser, with http://hylyht.com/index.html
-; displayed in the browser window.
-;
-; User enters details into the login form and clicks login.
-;
-; Profile page is displayed and the navigation bar displays http://hylyht.com/profile.html the
-; page should not be refreshed, content should be loaded via AJAX.
-;
-; What about the hash bang, how does this fit into the no-refresh with the Google Closure history5 API?
-;
-;
