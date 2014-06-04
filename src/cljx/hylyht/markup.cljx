@@ -1,5 +1,8 @@
 (ns hylyht.markup)
 
+(defprotocol Markup
+  (markup-str [markup]))
+
 (defn ^:private separate-attrs-and-children [& params]
   (loop [attrs-then-children params
          attrs {}]

@@ -35,7 +35,6 @@
   ;;)
 
 ;TODO:
-;  * debug to console...
 ;  * listen for all types of events
 ;     - is history only causing navigation events to be raised
 ;     - other types of events
