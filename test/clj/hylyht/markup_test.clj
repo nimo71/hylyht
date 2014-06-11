@@ -92,7 +92,7 @@
                  "<!--comment-->"
                "</body>"
              "</html>")
-           (markup-str
+           (markup-string
              [:declaration ["!DOCTYPE" "html"]]
              [:element [:html {:lang "en"} [
                          [:element [:head {} [

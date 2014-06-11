@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.5.1"]
+  :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2202"]
                  [domina "1.0.3-SNAPSHOT"]
                  [hiccups "0.2.0"]
@@ -19,7 +19,7 @@
 
   :source-paths ["src/clj" "target/classes"]
 
-  :test-paths ["test/clj" "target/classes"] ; "target/test-classes"]
+  :test-paths ["test/clj" "target/classes" "target/test-classes"]
 
   :cljx {:builds [{:source-paths ["src/cljx"]
                    :output-path "target/classes"

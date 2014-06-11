@@ -1,4 +1,5 @@
-(ns hylyht.markup)
+(ns hylyht.markup
+  (:gen-class))
 
 (defprotocol Markup
   (markup-str [markup]))
@@ -62,7 +63,7 @@
   (let [attrs (if (> (count attributes) 0) (str " " attributes) "")]
     (str "<" tagname attrs ">")))
 
-(declare markup-str)
+(declare markup-string)
 
 ;;TODO: content should be optional, if no content could take the form <name attr="value" .../>
 (defn element-str [el]
@@ -79,14 +80,14 @@
                      (str markup
                           (if (string? child)
                             child
-                            (markup-str child))))
+                            (markup-string child))))
                ""
                children))
          close-tag)))
 
 ;;TODO: implement element, declaration and comments as protocols?
 
-(defn markup-str [& markup]
+(defn markup-string [& markup]
   (reduce #(let [m-str          %1
                  [kind [tag _]] %2]
              (case kind

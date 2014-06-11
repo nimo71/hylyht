@@ -1,10 +1,10 @@
 (ns hylyht.markup.declaration
   (:require [hylyht.markup :as markup]))
 
+(defrecord Declaration [decs]
+  markup/Markup
+  (markup-str [_]
+    (str "<" (subs (reduce #(str %1 " " %2) "" decs) 1) ">")))
+
 (defn declaration [& decs]
-  (let [decl (apply markup/declaration decs)]
-    (reify markup/Markup
-      (markup-str [_]
-         (markup/declaration-str decl)))))
-
-
+  (Declaration. decs))
