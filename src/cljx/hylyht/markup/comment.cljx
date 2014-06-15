@@ -1,10 +1,10 @@
 (ns hylyht.markup.comment
   (:require [hylyht.markup :as markup]))
 
-(defrecord Comment [comment]
+(defrecord Comment [content]
   markup/Markup
   (markup-str [_]
-    (str "<!-- " comment " -->")))
+    (str "<!-- " content " -->")))
 
-(defn <!-- [comment]
-  (Comment. comment))
+(defn <!-- [& content]
+  (Comment. (apply markup/markup-str content)))

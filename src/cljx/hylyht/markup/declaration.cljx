@@ -1,10 +1,13 @@
 (ns hylyht.markup.declaration
   (:require [hylyht.markup :as markup]))
 
-(defrecord Declaration [decs]
+(defrecord Declaration [dec-name attrs]
   markup/Markup
   (markup-str [_]
-    (str "<" (subs (reduce #(str %1 " " %2) "" decs) 1) ">")))
+    (if (keyword? dec-name)
+      (str "<" (name dec-name) " " (markup/attr-str (apply hash-map attrs)) ">")
+      (str "<" (subs (reduce #(str %1 " " %2) "" (cons dec-name attrs)) 1) ">"))))
 
 (defn declaration [& decs]
-  (Declaration. decs))
+    (let [[dec-name & attrs] decs]
+      (Declaration. dec-name attrs)))
