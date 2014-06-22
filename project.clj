@@ -5,13 +5,14 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2202"]
+                 [org.clojure/clojurescript "0.0-2234"]
                  [domina "1.0.3-SNAPSHOT"]
                  [hiccups "0.2.0"]
                  [javax.servlet/servlet-api "2.5"]
                  [compojure "1.1.6"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
+            [com.cemerick/clojurescript.test "0.3.1"]
             [lein-ring "0.8.8"]
             [com.keminglabs/cljx "0.3.2"]]
 
@@ -37,14 +38,21 @@
                    :output-path "target/test-classes"
                    :rules :cljs}]}
 
-  :cljsbuild {:builds [{:source-paths ["src/cljs" "target/classes"] ;["src/cljs"]
+  :cljsbuild {
+    :builds {
+      :dev {:source-paths ["src/cljs" "target/classes"]
+            :compiler {:output-to "resources/public/js/hylyht.js"
+                       :optimizations :whitespace
+                       :pretty-print true }}
 
-                        ;; Google Closure (CLS) options configuration
-                        :compiler {:output-to "resources/public/js/hylyht.js"
-                                   :optimizations :whitespace
-                                   :pretty-print true }}]}
+      :test {:source-paths ["src/clj" "target/classes" "test/clj" "target/classes" "target/test-classes"]
+             :compiler {:output-to "resources/public/js/unit-test.js"
+                        :optimizations :whitespace
+                        :pretty-print true }}}
 
-
+    :test-commands {"unit-tests" ["phantomjs" :runner
+                                  "this.literal_js_was_evaluated=true"
+                                  "resources/public/js/unit-test.js"]}}
 
   :hooks [cljx.hooks])
 

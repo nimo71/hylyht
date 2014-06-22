@@ -1,6 +1,5 @@
 (ns hylyht.markup.element
-  (:require [hylyht.markup :as markup])
-  (:import [hylyht.markup Markup]))
+  (:require [hylyht.markup :as markup]))
 
 (defn ^:private create-open-tag [tagname attributes]
   (let [attrs (if (> (count attributes) 0)

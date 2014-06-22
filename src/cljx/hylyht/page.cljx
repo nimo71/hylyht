@@ -21,4 +21,4 @@
        (script "hylyht.main.init();")))])
 
 (defn render-page [page]
-  (apply markup-str page))
+  (markup-str page))

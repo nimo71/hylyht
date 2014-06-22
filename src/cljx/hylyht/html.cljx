@@ -1,5 +1,5 @@
 (ns hylyht.html
-  (:refer-clojure :exclude [meta])
+  #+clj (:refer-clojure :exclude [meta])
   (:require [hylyht.markup :as markup]
             [hylyht.markup.declaration :refer [declaration]]
             [hylyht.markup.element :refer [element]]

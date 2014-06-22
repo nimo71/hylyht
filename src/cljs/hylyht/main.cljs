@@ -14,7 +14,7 @@
   (let [document    (goog.dom.DomHelper. js/document)
         content-div (.getElement document "content")
         content     (token {:login login-form/create} reg-form/create)
-        markup      (apply markup-str (content))
+        markup      (markup-str (content))
         fragment    (.htmlToDocumentFragment document markup)]
 
     (.removeChildren document content-div)

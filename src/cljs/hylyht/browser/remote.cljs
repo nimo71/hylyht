@@ -1,5 +1,5 @@
 (ns hylyht.browser.remote
-  (:require [goog.net.XhrManager   :as manager]))
+  (:require [goog.net.XhrManager :as manager]))
 
 (def ^:private
   *xhr-manager*
