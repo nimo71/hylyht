@@ -45,7 +45,7 @@
                        :optimizations :whitespace
                        :pretty-print true }}
 
-      :test {:source-paths ["src/clj" "target/classes" "test/clj" "target/classes" "target/test-classes"]
+      :test {:source-paths ["src/cljs" "test/cljs" "target/classes" "target/test-classes"]
              :compiler {:output-to "resources/public/js/unit-test.js"
                         :optimizations :whitespace
                         :pretty-print true }}}

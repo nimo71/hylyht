@@ -1,53 +1,27 @@
 (ns hylyht.markup
-  #+cljs (:require [hylyht.logging :as log]))
-
-#+cljs (def logger (log/get-logger "hylyht.markup"))
+  #+cljs (:require [clojure.string :as string]))
 
 (defprotocol Markup
   (markup-str [markup]))
 
-; TODO: All of the types need to be valid for cljs as well as clj - can String work for cljs??
 (extend-protocol Markup
 
   #+clj String
   #+cljs string
-  (markup-str [this]
-    #+cljs (log/info logger "(markup-str String)")
-    this)
+  (markup-str [this] this)
 
-  #+cljs cljs.core/IndexedSeq
   #+clj clojure.lang.IndexedSeq
+  #+cljs cljs.core/IndexedSeq
   (markup-str [this]
-    #+cljs (log/info logger "(markup-str IndexedSeq)")
     (reduce #(str %1 (markup-str %2)) "" this))
-
-
-  ;#+clj clojure.lang/ISeq
-  ;#+cljs cljs.core/ISeq
-  ;(markup-str [this]
-  ;  (reduce #(str %1 (markup-str %2)) "" this))
-
-  ;#+clj clojure.lang/Seqable
-  ;#+cljs cljs.core/ISeqable
-  ;(markup-str [this]
-  ;  (markup-str (seq this)))
-
-
-  ;#+clj clojure.lang.ArraySeq
-  ;#+cljs cljs.core.ArraySeq
-  ;(markup-str [this]
-  ;  (reduce #(str %1 (markup-str %2)) "" this))
 
   #+clj clojure.lang.PersistentVector
   #+cljs cljs.core/PersistentVector
   (markup-str [this]
-    #+cljs (log/info logger "(markup-str PersistentVector)")
     (reduce #(str %1 (markup-str %2)) "" this))
 
   nil
-  (markup-str [_]
-    #+cljs (log/info logger "(markup-str nil)")
-    ""))
+  (markup-str [_] ""))
 
 ; helper to create an attribute string
 (defn attr-str [attr-map]
