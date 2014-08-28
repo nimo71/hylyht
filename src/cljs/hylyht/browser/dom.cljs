@@ -5,7 +5,7 @@
 
 
 ; http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/#The_browser_main_functionality
-(defrecord DomNode [markup peer]
+(defrecord DomNode [markup peer children]
 
   ;(attach) attach the peer to the DomNode.
 
@@ -20,9 +20,12 @@
 (defn render [root-markup])
 
 (defn attach [markup]
-  (let [tagname (name (:tag-name markup))
-        helper  (goog.dom.DomHelper.)
-        el      (.createDom helper tagname)
-        node    (DomNode. markup el)]
-    node))
+  (if (string? markup)
+    (DomNode. markup markup)
+
+    (let [tagname  (name (:tag-name markup))
+          helper   (goog.dom.DomHelper.)
+          el       (.createDom helper tagname)
+          children (map attach (:children markup))]
+      (DomNode. markup el children))))
 
